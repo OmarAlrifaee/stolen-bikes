@@ -11,7 +11,7 @@ const page = () => {
         Stolen Bikes In Munich Area
       </Typography>
       <Filter />
-      <Suspense>
+      <Suspense fallback>
         <Bikes />
       </Suspense>
     </Layout>
