@@ -2,7 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Form from "next/form";
-const Filter = () => {
+type Props = {
+  start_date: string;
+  end_date: string;
+  search: string;
+};
+const Filter = ({ end_date, search, start_date }: Props) => {
   return (
     <Form
       action={"/bikes"}
@@ -11,25 +16,28 @@ const Filter = () => {
       <Input
         type="search"
         name="search"
+        defaultValue={search}
         placeholder="Search By Title"
         className="focus-visible:ring-primary"
       />
       <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
         <div>
-          <Label htmlFor="date-from">From</Label>
+          <Label htmlFor="start_date">From</Label>
           <Input
             type="date"
-            id="date-from"
-            name="date-from"
+            id="start_date"
+            defaultValue={start_date}
+            name="start_date"
             className="focus-visible:ring-primary cursor-pointer"
           />
         </div>
         <div>
-          <Label htmlFor="date-to">To</Label>
+          <Label htmlFor="end-date">To</Label>
           <Input
             type="date"
-            id="date-to"
-            name="date-to"
+            id="end_date"
+            defaultValue={end_date}
+            name="end_date"
             className="focus-visible:ring-primary cursor-pointer"
           />
         </div>

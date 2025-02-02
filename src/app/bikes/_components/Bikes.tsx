@@ -1,25 +1,59 @@
 import { Layout } from "@/components/shared/Layout";
 import BikeCard from "./BikeCard";
 import { Pagination } from "@/components/shared/Pagination";
-import { IBike, IDataCount } from "@/api/types";
+import { getAllBikes } from "@/api/services/bikes";
+import { intialPage, per_page } from "@/data/pagination";
+import { Typography } from "@/components/shared/Typography";
+import { filterByDateRange } from "@/utils/filterByDateRange";
 
-const Bikes = async () => {
-  const res = await fetch(
-    `https://bikeindex.org/api/v3/search?location=munich&per_page=10&stolenness=proximity&page=2`
-  );
-  const countRes = await fetch(
-    "https://bikeindex.org/api/v3/search/count?location=munich&distance=10&stolenness=proximity"
-  );
-  const countData: IDataCount = await countRes.json();
-  const data: { bikes: IBike[] } = await res.json();
+type Props = {
+  page?: string;
+  search?: string;
+  start_date?: string;
+  end_date?: string;
+};
+const Bikes = async ({
+  page = intialPage.toString(),
+  search,
+  start_date,
+  end_date,
+}: Props) => {
+  const { data, meta } = await getAllBikes({
+    location: "munich",
+    stolenness: "proximity",
+    per_page: per_page.toString(),
+    page,
+    query: search,
+  });
+  // this filter will only applay on the current pagination page data
+  // cuz backend api does'nt provide a date filter
+  const filteredData = data?.filter((b) => {
+    return start_date && end_date
+      ? filterByDateRange({
+          target: b?.date_stolen,
+          start: start_date,
+          end: end_date,
+        })
+      : true;
+  });
   return (
     <>
+      <div className="flex justify-between md:flex-row flex-col">
+        <Typography>
+          Total In Munich:{" "}
+          <span className="text-muted-foreground">{meta?.proximity} bike</span>
+        </Typography>
+        <Typography>
+          Total In World:{" "}
+          <span className="text-muted-foreground">{meta?.stolen} bike</span>
+        </Typography>
+      </div>
       <Layout variant={"cards"}>
-        {data?.bikes?.map((bike) => (
+        {filteredData?.map((bike) => (
           <BikeCard key={bike?.id} bike={bike} />
         ))}
       </Layout>
-      <Pagination total={countData.proximity} pageSize={10} />
+      <Pagination total={meta?.proximity} pageSize={per_page} />
     </>
   );
 };
