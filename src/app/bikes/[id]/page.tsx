@@ -27,8 +27,11 @@ const page = async ({ params }: Props) => {
   const bike = await getBike({ id });
   if (!bike) NotFound();
   return (
-    <Layout variant={"row-page"} className="flex-col-reverse">
-      <div className="flex-1 flex flex-col gap-12">
+    <Layout
+      variant={"row-page"}
+      className="flex-col-reverse min-h-screen lg:items-center"
+    >
+      <div className="flex-1 flex flex-col gap-8">
         <BikeDetails {...bike} />
       </div>
       <BikeImage src={getImageUrl(bike?.thumb ?? bike?.large_img)} />

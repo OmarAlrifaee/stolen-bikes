@@ -29,21 +29,23 @@ const BikeDetails = (bike: IBike) => {
       <Typography variant={"h1"}>{bike?.title}</Typography>
       <div className="flex flex-col gap-2">
         <SectionTitle title={"Bike Info"} />
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {Object.entries(bikeInfo).map(([title, desc]) => (
             <Detail title={title} desc={desc ?? "unkown"} key={title} />
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <SectionTitle title={"Description"} />
-        <Typography variant={"p"} className="text-muted-foreground">
-          {bike?.description ?? "unkown"}
-        </Typography>
-      </div>
+      {!!bike?.description?.length && (
+        <div className="flex flex-col gap-2">
+          <SectionTitle title={"Description"} />
+          <Typography variant={"p"} className="text-muted-foreground">
+            {bike?.description}
+          </Typography>
+        </div>
+      )}
       <div className="flex flex-col gap-2">
         <SectionTitle title={"Theft Details"} />
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {Object.entries(theftInfo).map(([title, desc]) => (
             <Detail title={title} desc={desc ?? "unkown"} key={title} />
           ))}

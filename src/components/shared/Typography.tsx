@@ -4,8 +4,8 @@ import { ReactNode } from "react";
 const typographyVariants = cva("font-bold", {
   variants: {
     variant: {
-      h1: "sm:text-xl text-lg",
-      h2: "sm:text-lg text-md",
+      h1: "md:text-xl text-lg",
+      h2: "md:text-lg text-md",
       h3: "text-md",
       h4: "text-[1rem]",
       p: "text-[1rem] leading-[1.7] text-justify font-normal",
