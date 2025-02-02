@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "files.bikeindex.org",
+        hostname: process.env.IMAGE_HOSTNAME!,
         pathname: "/uploads/**",
         protocol: "https",
       },
