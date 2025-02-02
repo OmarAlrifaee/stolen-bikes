@@ -7,6 +7,8 @@ const typographyVariants = cva("font-bold", {
       h1: "sm:text-xl text-lg",
       h2: "sm:text-lg text-md",
       h3: "text-md",
+      h4: "text-[1rem]",
+      p: "text-[1rem] leading-[1.7] text-justify font-normal",
       small: "text-sm line-clamp-1",
     },
     _color: {

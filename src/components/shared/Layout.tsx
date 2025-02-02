@@ -8,6 +8,8 @@ const layoutVariants = cva("", {
       page: "container flex flex-col gap-11 py-11", // page
       cards:
         "grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center gap-x-8 gap-y-5",
+      "row-page":
+        "container flex md:flex-row flex-col md:justify-between gap-5 py-11",
     },
   },
   defaultVariants: {
