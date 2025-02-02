@@ -1,6 +1,5 @@
+import { NotFound as NotFoundLayout } from "@/components/shared/NotFound";
 const NotFound = () => {
-  return (
-    <div>NotFound</div>
-  )
-}
-export default NotFound
+  return <NotFoundLayout variant="NotFoundPage" className="min-h-screen w-[50vh]" />;
+};
+export default NotFound;

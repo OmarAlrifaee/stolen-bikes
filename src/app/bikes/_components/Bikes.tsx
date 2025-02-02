@@ -5,6 +5,7 @@ import { getAllBikes } from "@/api/services/bikes";
 import { intialPage, per_page } from "@/data/pagination";
 import { Typography } from "@/components/shared/Typography";
 import { filterByDateRange } from "@/utils/filterByDateRange";
+import { NotFound } from "@/components/shared/NotFound";
 
 type Props = {
   page?: string;
@@ -36,6 +37,8 @@ const Bikes = async ({
         })
       : true;
   });
+  if (!filteredData.length)
+    return <NotFound variant="NoData" className="mt-5" />;
   return (
     <>
       <div className="flex justify-between md:flex-row flex-col">

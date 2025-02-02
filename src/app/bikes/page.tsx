@@ -3,6 +3,7 @@ import { Typography } from "@/components/shared/Typography";
 import { Suspense } from "react";
 import Bikes from "./_components/Bikes";
 import Filter from "./_components/Filter";
+import Loading from "@/components/shared/Loading";
 type Props = {
   searchParams: Promise<{
     search: string;
@@ -19,7 +20,10 @@ const page = async ({ searchParams }: Props) => {
         Stolen Bikes In Munich Area
       </Typography>
       <Filter search={search} start_date={start_date} end_date={end_date} />
-      <Suspense key={`${pageNumber}-${search}`} fallback="loading...">
+      <Suspense
+        key={`${pageNumber}-${search}`}
+        fallback={<Loading variant={"spinner"} />}
+      >
         <Bikes
           page={pageNumber}
           search={search}

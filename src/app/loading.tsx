@@ -1,6 +1,6 @@
+import Loading from "@/components/shared/Loading";
+
 const loading = () => {
-  return (
-    <div>loading</div>
-  )
-}
-export default loading
+  return <Loading variant={"page"} />;
+};
+export default loading;
